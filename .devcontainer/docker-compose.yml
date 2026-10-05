@@ -1,0 +1,40 @@
+services:
+  web:
+    build: ./php-apache
+    ports:
+      - "8080:80"
+    volumes:
+      - ../:/workspace
+      - ../arquiler:/var/www/html
+      - ../assets:/var/www/html/assets
+    depends_on:
+      - db
+    environment:
+      MYSQLHOST: db
+      MYSQLPORT: 3306
+      MYSQLUSER: root
+      MYSQLPASSWORD: root
+      MYSQLDATABASE: dw2_agenda
+
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: dw2_agenda
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+
+volumes:
+  mariadb_data:

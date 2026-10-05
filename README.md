@@ -1,2 +1,0 @@
-# Padel
-clase de padel

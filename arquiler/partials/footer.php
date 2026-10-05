@@ -1,0 +1,1 @@
+    <footer class="app-footer"><span>PADELCLUB</span><span>Nos vemos en la cancha.</span></footer>
